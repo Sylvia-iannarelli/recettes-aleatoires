@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="example-wrapper">
+    <div class="container mt-5">
         <h1>Votre recette aléatoire</h1>
 
         {% for recipe in recipes %}
@@ -20,6 +20,9 @@
                 <li>Nb de personnes : {{ recipe.serves }}</li>
             </ul>
         {% endfor %}
+
+        <a class="btn btn-primary m-3" href="/">Actualiser</a>
+        <a class="btn btn-danger m-3" href="{{path('app_comment_new')}}">Commenter</a>
     </div>
     
 {% endblock %}
