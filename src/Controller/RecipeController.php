@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\RecipeRepository;
+use App\Service\RandomService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,6 +15,17 @@ class RecipeController extends AbstractController
     {
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipeRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/random', name: 'app_random_recipe', methods: "GET")]
+    public function getRandomRecipe(RecipeRepository $recipeRepository): Response
+    {
+        // $recipe = $recipeRepository->findRandomRecipe();
+        // return $this->json($recipe);
+
+        return $this->render('recipe/random.html.twig', [
+            'recipe' => $recipeRepository->findRandomRecipe(),
         ]);
     }
 }

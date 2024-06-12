@@ -5,7 +5,10 @@
 {% block body %}
 
     <div class="container mt-5">
-        <h1>Votre recette aléatoire</h1>
+        <div style="display:flex; justify-content: right;">
+            <a class="btn btn-primary m-3" href="{{ path ('app_random_recipe')}}">Recette aléatoire</a>
+        </div>
+        <h1 class="mb-5">Toutes les recettes</h1>
 
         {% for recipe in recipes %}
             <ul>
@@ -19,10 +22,9 @@
                 <li>Temps de cuisson : {{ recipe.cookingTime }}</li>
                 <li>Nb de personnes : {{ recipe.serves }}</li>
             </ul>
-            <a class="btn btn-danger m-3" href="{{ path ('app_comment_new', {id:recipe.id})}}">Commenter</a>
+            <a class="btn btn-danger mx-3 mb-5" href="{{ path ('app_comment_new', {id:recipe.id})}}">Commenter</a>
         {% endfor %}
 
-        <a class="btn btn-primary m-3" href="/">Actualiser</a>
     </div>
     
 {% endblock %}

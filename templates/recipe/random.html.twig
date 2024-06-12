@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RecipeController!{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1>Votre recette aléatoire</h1>
+
+            <ul>
+                <li>Nom : {{ recipe.name }}</li>
+                <li>Ingrédients : 
+                    {% for ingredient in recipe.ingredients %}
+                        {{ ingredient }}, 
+                    {% endfor %}
+                </li>
+                <li>Temps de préparation : {{ recipe.preparation_time }}</li>
+                <li>Temps de cuisson : {{ recipe.cooking_time }}</li>
+                <li>Nb de personnes : {{ recipe.serves }}</li>
+            </ul>
+            <a class="btn btn-danger m-3" href="{{ path ('app_comment_new', {id:recipe.id})}}">Commenter</a>
+
+            <a class="btn btn-primary m-3" href="{{ path ('app_random_recipe')}}">Actualiser</a>
+
+            <a class="btn btn-warning m-3" href="/">Retour accueil</a>
+    </div>
+    
+{% endblock %}
