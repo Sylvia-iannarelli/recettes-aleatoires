@@ -16,23 +16,33 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    public function findRandomRecipe()
+    // public function findRandomRecipe()
+    // {
+    //     // On recupère la connexion à la BDD
+    //     $conn = $this->getEntityManager()->getConnection();
+
+    //     // On recherche les recettes, on les trie aléatoirement et on en garde qu'une 
+    //     $sql = '
+    //         SELECT * FROM recipe r
+    //         ORDER BY RAND() LIMIT 1
+    //     ';
+
+    //     // On execute la requête
+    //     $stmt = $conn->prepare($sql);
+    //     $resultSet = $stmt->executeQuery();
+
+    //     // On récupère un tableau
+    //     return $resultSet->fetchAssociative();
+    // }
+
+    // Correction
+    public function findRandomRecipe(): ?Recipe
     {
-        // On recupère la connexion à la BDD
-        $conn = $this->getEntityManager()->getConnection();
-
-        // On recherche les recettes, on les trie aléatoirement et on en garde qu'une 
-        $sql = '
-            SELECT * FROM recipe r
-            ORDER BY RAND() LIMIT 1
-        ';
-
-        // On execute la requête
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        // On récupère un tableau
-        return $resultSet->fetchAssociative();
+        return $this->createQueryBuilder('r')
+            ->orderBy('RAND()')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     //    /**

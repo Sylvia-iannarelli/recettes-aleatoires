@@ -136,4 +136,16 @@ class Recipe
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'ingredients' => $this->getIngredients(),
+            'preparationTime' => $this->getPreparationTime(),
+            'cookingTime' => $this->getCookingTime(),
+            'serves' => $this->getServes()
+        ];
+    }
 }

@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\RecipeRepository;
-use App\Service\RandomService;
+use App\Service\RecipeService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,17 +20,29 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/', name: 'app_random_recipe', methods: "GET")]
-    public function getRandomRecipe(RecipeRepository $recipeRepository): Response
+    public function getRandomRecipe(RecipeService $recipeService): Response
     {
-        $recipe = $recipeRepository->findRandomRecipe();
-        // dd($recipe);
+        // $recipe = $recipeRepository->findRandomRecipe();
+        // // dd($recipe);
 
-        $ingredients = json_decode($recipe["ingredients"]);
-        // dd($ingredients);
+        // $ingredients = json_decode($recipe["ingredients"]);
+        // // dd($ingredients);
+
+        // return $this->render('recipe/random.html.twig', [
+        //     'recipe' => $recipeRepository->findRandomRecipe(),
+        //     'ingredients' => $ingredients
+        // ]);
+
+        // Correction
+        try{
+            $recipe = $recipeService->getRandomRecipeAsArray();
+        } catch (Exception $e) {
+            $this->addFlash('not-found', $e->getMessage());
+            return $this->render('recipe/not-found.html.twig');
+        }
 
         return $this->render('recipe/random.html.twig', [
-            'recipe' => $recipeRepository->findRandomRecipe(),
-            'ingredients' => $ingredients
+            'recipe' => $recipe
         ]);
     }
 }
