@@ -27,7 +27,7 @@
                 <li>Temps de cuisson : {{ recipe.cookingTime }}</li>
                 <li>Nb de personnes : {{ recipe.serves }}</li>
             </ul>
-            <a class="btn btn-danger mx-3 mb-5" href="{{ path ('app_comment_new', {id:recipe.id})}}">Commenter</a>
+            <a class="btn btn-danger mx-3 mb-5" href="{{ path ('app_comment_new', {id:recipe.id, user_id:app.user})}}">Commenter</a>
         {% endfor %}
 
     </div>

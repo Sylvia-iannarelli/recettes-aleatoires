@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Recipe;
-use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/comment')]
 class CommentController extends AbstractController
@@ -25,7 +25,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/{id}/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Recipe $recipe, User $user, Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Recipe $recipe, UserInterface $user, Request $request, EntityManagerInterface $entityManager): Response
     {
         $comment = new Comment();
         $user = $this->getUser();
@@ -38,14 +38,13 @@ class CommentController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_index', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('comment/new.html.twig', [
             // 'comment' => $comment,
             'form' => $form,
-            'recipe' => $recipe,
-            'user' => $user,
+            'recipe' => $recipe
         ]);
     }
 
