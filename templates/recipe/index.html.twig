@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RecipeController!{% endblock %}
+{% block title %}Recette aléatoire{% endblock %}
 
 {% block body %}
 
     <div class="container mt-5">
         <div style="display:flex; justify-content: right;">
             <a class="btn btn-primary m-3" href="{{ path ('app_random_recipe')}}">Recette aléatoire</a>
+            {% if app.user %}
+                <a class="btn btn-info m-3" href="{{ path ('app_logout')}}">Déconnexion</a>
+            {% else %}
+                <a class="btn btn-info m-3" href="{{ path ('app_login')}}">Connexion</a>
+            {% endif %}
         </div>
         <h1 class="mb-5">Toutes les recettes</h1>
 

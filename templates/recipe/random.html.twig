@@ -5,6 +5,15 @@
 {% block body %}
 
     <div class="container mt-5">
+
+        <div style="display:flex; justify-content: right;">
+            {% if app.user %}
+                <a class="btn btn-info m-3" href="{{ path ('app_logout')}}">Déconnexion</a>
+            {% else %}
+                <a class="btn btn-info m-3" href="{{ path ('app_login')}}">Connexion</a>
+            {% endif %}
+        </div>
+
         <h1>Votre recette aléatoire</h1>
 
             <ul>
