@@ -19,7 +19,7 @@ class Recipe
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::JSON)]
+    #[ORM\Column]
     private array $ingredients = [];
 
     #[ORM\Column(length: 255)]
