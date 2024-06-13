@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RecipeController extends AbstractController
 {
-    #[Route('/', name: 'app_recipe_index', methods: "GET")]
+    #[Route('/liste', name: 'app_recipe_index', methods: "GET")]
     public function index(RecipeRepository $recipeRepository): Response
     {
         return $this->render('recipe/index.html.twig', [
@@ -19,7 +19,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/random', name: 'app_random_recipe', methods: "GET")]
+    #[Route('/', name: 'app_random_recipe', methods: "GET")]
     public function getRandomRecipe(RecipeRepository $recipeRepository): Response
     {
         $recipe = $recipeRepository->findRandomRecipe();
