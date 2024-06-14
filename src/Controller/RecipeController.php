@@ -47,7 +47,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_show', methods: "GET")]
+    #[Route('/{id}', name: 'app_recipe_show', methods: "GET", requirements: ['id' => '\d+'])]
     public function show(Recipe $recipe): Response
     {
         return $this->render('recipe/random.html.twig', [
