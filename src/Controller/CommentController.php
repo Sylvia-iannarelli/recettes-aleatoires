@@ -38,7 +38,9 @@ class CommentController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('recipe/random.html.twig', [
+                'recipe' => $recipe
+            ]);
         }
 
         return $this->render('comment/new.html.twig', [

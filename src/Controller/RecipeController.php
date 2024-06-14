@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
 use App\Service\RecipeService;
 use Exception;
@@ -41,6 +42,14 @@ class RecipeController extends AbstractController
             return $this->render('recipe/not-found.html.twig');
         }
 
+        return $this->render('recipe/random.html.twig', [
+            'recipe' => $recipe
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_recipe_show', methods: "GET")]
+    public function show(Recipe $recipe): Response
+    {
         return $this->render('recipe/random.html.twig', [
             'recipe' => $recipe
         ]);
